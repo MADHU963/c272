@@ -1,0 +1,144 @@
+class 271 revision
+Revision:-
+publishMessage() method was
+used to publish data to Twilio server
+
+What is the purpose of using
+Twilio?
+It is used to communicate with
+many users.
+
+
+c272:-
+
+In today’s class we are going to add the following code :
+- Updating the textarea with the text written by the different users, which we were
+displaying on the console screen in the previous class.
+- Getting, sharing and setting the selected background color for the text area for all the
+users.
+- Downloading the text from the text area as a txt file
+- Also we are going to deploy the code on cloud using Heroku.
+
+
+Procfile : This file is used to deploy web apps on heroku.
+In this file we mention which file should run when a web app is deployed on heroku.
+This file tells heroku which file to execute in order to run the app on the heroku
+platform.
+
+
+web: gunicorn app:app
+
+web defines a web application.
+- gunicorn is a small python server which is required to deploy app on heroku
+- The app is nothing but our python file name where all our python code is stored. If we
+had some other file name then that name would be here.
+
+
+runtime.txt : This file includes the version of python on which we want to run our web
+application, Like in this file we define the python version which we need to install on heroku
+and run our flask application as shown below.
+
+
+
+conda activate cloud
+
+pip install flask
+pip install faker
+pip install twilio
+pip install -r requirements.txt
+
+python app.py
+
+
+messageSync():-
+It is defined to keep sending the data across users in a specific interval of time. This
+function will be called when any one writes anything in the textarea.
+● In this function we are getting the text from the text area.
+● We define the setTimeout function to call SettingSyncdata function after a specific
+interval of time
+
+
+
+Todays code:-
+select_element.addEventListener('change',select_color)
+
+we need to mention which HTML element we need to have an event listener, as
+we want to get the selected value from the select tag, so we will set the event listener
+on the select tag, for this we will mention the variable select_element which holds the
+select tag.
+
+
+select_element.addEventListener('change',select_color)
+ Here we are selecting color from the select tag of HTML, for doing this
+we will use document.getElementbyID() and pass the ID which we
+have given to the select element of HTML which is ‘select’.
+- This will refer to the select tag, and to select the color which is defined
+in the select tag and we need to add the keyword value after
+document.getElementbyID(). And storing in a selected_color variable.
+● Then we will apply the if condition on selected_color variable to check if the user has
+selected ‘white color’ and assigning ‘white’ to background_color
+
+
+
+
+   function SettingSyncData(){
+    syncStream.publishMessage({ 
+            textarea_color:background_color,
+            textarea_value:text
+        });
+    }
+
+- We are adding textarea_color as a key. So that later to access the
+background color value this key can be used.
+- And then we are adding the value as a background_color variable
+(which holds the background color of the text area selected by the user).
+- By adding this we can replicate the content from one webpage to the
+rest of them.
+- Example of data getting stored in Twilio server if the text is ‘Hi’ and
+selected color is ‘red’ then the data will be stored as:
+textarea_color: ‘red’
+textarea_value: ‘Hi’
+
+
+
+
+
+def download_text():
+    text_from_notepad = request.form['text']
+    with open('workfile.txt', 'w') as f:
+        f.write(text_from_notepad)
+
+    path_to_store_txt = "workfile.txt"
+
+    return send_file(path_to_store_txt, as_attachment=True)
+
+
+We are using the request.files[] method of request to get the data from the
+textarea of html by passing the “text”, “text” is the name which was given to
+the textarea in html and then store this in the text_from_notepad variable.
+
+‘with’ is a keyword which we are using to write the file using the open()
+function.
+- Inside the open() function we are passing the name of the file ‘workfile.txt’ and
+operation mode is in write mode ‘w’.
+- And also we are writing the data in the file as ‘f’ variable, where ‘f’ stores the
+data which we are writing into the file.
+
+
+Here, we are writing the data using the write() function.
+- And inside the write() function we will pass the variable ‘text_from_notepad’
+text_from_notepad which holds the text values from the textarea.
+
+
+As we want the file to get downloaded in the download folder, hence we will
+just mention the file name as ‘workfile.txt’ you can mention any name.
+- So when the user clicks on the ‘Download Text’ button, the text file will get
+downloaded in the name ‘workfile.txt’ in the download folder.
+
+This send_file() function helps us to save the file in the mentioned folder with
+the mentioned name.
+- Here, we are returning the send_file() function to save our txt file and inside
+this we are passing two parameters:
+- One is the ‘path_to_store_txt’ which holds the file name
+- Another one is the ‘as_attachment=True’ (enabling as True to send this
+file as attachment).
